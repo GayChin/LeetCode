@@ -22,7 +22,7 @@ class Solution {
             return 0;
         }
         if(map.containsKey(root)){
-            return map.get(root);
+            return map.get(root); //this part since the map contains the root (root.right.right), programe dont have to count again when rob(root.left) 
             
         }
         if(root.left != null){
