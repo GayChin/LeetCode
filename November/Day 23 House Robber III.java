@@ -13,6 +13,7 @@
  *     }
  * }
  */
+//solution 1
 class Solution {
      HashMap <TreeNode, Integer> map = new HashMap();
     public int rob(TreeNode root) {
@@ -33,5 +34,33 @@ class Solution {
         }
         map.put (root, Math.max(root.val + val, rob(root.left) + rob(root.right)));
         return map.get(root);
+    }
+
+}
+// Solution 2
+class Solution {
+     
+    public int rob(TreeNode root) {
+        int [] result = subRob(root);
+        return Math.max(result[0],result[1]);
+        
+    }
+    
+    public int [] subRob (TreeNode root){
+        if(root == null){
+            return new int [2];
+        }
+        
+        int [] left = subRob(root.left);
+        int [] right = subRob(root.right);
+        int [] results = new int[2];
+        
+        
+        // one result will get son
+        results [0] = Math.max(left[0],left[1])  + Math.max(right[0],right[1]);
+        // another one get root and grandson
+        results [1] = root.val + left[0] + right[0];
+        return results;
+        
     }
 }
