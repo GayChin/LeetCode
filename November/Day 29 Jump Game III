@@ -1,0 +1,14 @@
+class Solution {
+    public boolean canReach(int[] arr, int start) {
+        int n = arr.length;
+        return dfs (arr, start,0); // we wanna find the index of 0 
+    }
+    
+    public boolean dfs (int[] arr, int start, int tot){
+        if(start < 0 || start >= arr.length)  return false;   // check first highest priority out of bound;
+        if(arr[start] == 0) return true;        //cuz it ad reach 0 at first
+        if(tot >= arr.length) return false; //steps taken longer than array length 
+           
+        return (dfs(arr, start + arr[start], tot + 1)) || (dfs(arr, start - arr[start], tot + 1)) ;    
+    }
+}
