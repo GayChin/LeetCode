@@ -1,0 +1,27 @@
+class Solution {
+    List<List<String>> list = new ArrayList<>();
+    public List<List<String>> partition(String s) {
+        dfs(s, 0, new ArrayList<>());
+        return list;
+    }
+    
+    private void dfs(String s, int start, List<String> curL){
+        if(start >= s.length()) list.add(new ArrayList<>(curL));
+        for(int end = start; end < s.length(); end++){
+            if(isPalindrome(s, start, end)){
+                curL.add(s.substring(start, end + 1));
+                dfs(s, end + 1, curL);
+                curL.remove(curL.size() - 1); //to clear the curl arraylist 
+            }
+        }
+    }
+    
+    private boolean isPalindrome(String s, int l, int r){
+        while(l <= r){
+            if(s.charAt(l) != s.charAt(r)) return false;
+            l++;
+            r--;
+        }
+        return true;
+    }
+}
