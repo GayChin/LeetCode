@@ -10,7 +10,7 @@ public int maxCoins(int[] nums) {
         
     }
     int [][] dp = new int [n+2][n+2];
-    // dp [j][k] for tracing 
+   
     for (int j = 1 ; j <= n ; j++ ){ // set ending point
         for(int i = j ; i >= 1 ; i--) // set starting point
             for(int k = i ; k<=j ; k++){ // set number we wanna keep as last
