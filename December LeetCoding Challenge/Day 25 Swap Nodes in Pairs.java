@@ -1,17 +1,4 @@
 
-indiaCoder's avatar
-indiaCoder
-297
-Last Edit: 18 hours ago
-
-186 VIEWS
-
-
-
-// https://www.youtube.com/watch?v=2-fFzM4wtlI&feature=youtu.be
-
-
-
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -49,11 +36,22 @@ class Solution {
 	// Recursive solution
 	
 	 // O(N) Time complexity
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
     public ListNode swapPairs(ListNode head) {
         if (head == null || head.next == null) return head;
-        ListNode forward = head.next;
-        head.next = swapPairs(forward.next);
-        forward.next = head;
+        ListNode forward = head.next; //forward will be the head of two switched element
+        head.next = swapPairs(forward.next); //swap next pair
+        forward.next = head; // the original 1st value now become next to the forward to swap
         return forward;
     }
 }
