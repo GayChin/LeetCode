@@ -8,7 +8,7 @@ class Solution {
         if( original == target ) return cloned;
         if( original.left != null ) {
             TreeNode tmp = dfs( original.left, cloned.left, target );
-            if( tmp != null ) return tmp;
+            if( tmp != null ) return tmp; //recursion return value one by one to the first node
         }
         if( original.right != null ) {
            TreeNode tmp = dfs( original.right, cloned.right, target );
