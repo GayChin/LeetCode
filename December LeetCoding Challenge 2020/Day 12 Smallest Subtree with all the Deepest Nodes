@@ -1,0 +1,56 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    // TC : O(n)
+    // SC : O(n) , n is no of nodes in the tree
+    
+    // Used for caching the depth value at each node
+
+    public TreeNode subtreeWithAllDeepest(TreeNode root) {
+        if(root==null){
+            return null;
+        }
+        //get the length of the left subtree
+        int leftDepth  = depth(root.left);
+        
+        //get the length of the right subtree
+        int rightDepth  = depth(root.right);
+        
+        // if it is a subtree leftD = rightD , will return rootnode if both length = 0
+        if(leftDepth == rightDepth){
+            return root;
+        } else if(leftDepth > rightDepth){      
+            return subtreeWithAllDeepest(root.left);
+        } else if(rightDepth > leftDepth){
+            return subtreeWithAllDeepest(root.right);
+        }
+        return null;
+    }
+
+
+    private int depth(TreeNode root){
+
+        if(root ==null){
+            return 0;
+        }
+        int leftDepth = depth(root.left);
+        int rightDepth = depth(root.right);
+        // each time we compare the value between left and right before return and add 1
+        int depth = Math.max(leftDepth, rightDepth) +1;
+
+        return depth;
+    }
+}
