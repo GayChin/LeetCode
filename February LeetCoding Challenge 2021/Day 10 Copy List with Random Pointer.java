@@ -1,45 +1,17 @@
-public RandomListNode copyRandomList(RandomListNode head) {
-  RandomListNode iter = head, next;
-
-  // First round: make copy of each node,
-  // and link them together side-by-side in a single list.
-  while (iter != null) {
-    next = iter.next;
-
-    RandomListNode copy = new RandomListNode(iter.label);
-    iter.next = copy;
-    copy.next = next;
-
-    iter = next;
-  }
-
-  // Second round: assign random pointers for the copy nodes.
-  iter = head;
-  while (iter != null) {
-    if (iter.random != null) {
-      iter.next.random = iter.random.next;
+class Solution {
+    HashMap<Node, Node> map = new HashMap<>();
+    public Node copyRandomList(Node head) {
+        if (head == null) {
+            return null;
+        }
+        else if (map.containsKey(head)) {
+            return map.get(head);
+        } else {
+            Node copy = new Node(head.val);
+            map.put(head, copy);
+            copy.next = copyRandomList(head.next);
+            copy.random = copyRandomList(head.random);
+            return copy;
+        }
     }
-    iter = iter.next.next;
-  }
-
-  // Third round: restore the original list, and extract the copy list.
-  iter = head;
-  RandomListNode pseudoHead = new RandomListNode(0);
-  RandomListNode copy, copyIter = pseudoHead;
-
-  while (iter != null) {
-    next = iter.next.next;
-
-    // extract the copy
-    copy = iter.next;
-    copyIter.next = copy;
-    copyIter = copy;
-
-    // restore the original list
-    iter.next = next;
-
-    iter = next;
-  }
-
-  return pseudoHead.next;
 }
