@@ -21,6 +21,6 @@ public class Solution {
             l ++;
             r --;
         }
-        return end -start +1;
+         return end - start > 0 ? end - start +1 : 0;
 }
 }
