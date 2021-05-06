@@ -12,6 +12,7 @@ public TreeNode toBST(ListNode head, ListNode tail){
         fast = fast.next.next;
         slow = slow.next;
     }
+    //middle = slow 
     TreeNode thead = new TreeNode(slow.val);
     thead.left = toBST(head,slow);
     thead.right = toBST(slow.next,tail);
